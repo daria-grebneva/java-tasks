@@ -5,19 +5,8 @@ public class Solution {
     public int solution(int N) {
         int result = 0;
 
-        while (N > 1) {
-            int temp = N % 2;
-
-            if (temp == 0) {
-                N = N / 2;
-                ++result;
-            } else {
-                N = N - 1;
-                ++result;
-            }
-        }
-
-        if (N == 1) {
+        while (N >= 1) {
+            N = (N % 2 == 0) ? (N / 2) : (--N);
             ++result;
         }
 
