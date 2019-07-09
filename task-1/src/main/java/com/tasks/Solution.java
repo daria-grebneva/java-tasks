@@ -1,8 +1,15 @@
 package com.tasks;
+import java.lang.IllegalArgumentException;
 
 public class Solution {
 
     public int solution(int N) {
+
+        if (N < 0)
+        {
+            throw new IllegalArgumentException("The number should be positive");
+        }
+
         int result = 0;
 
         while (N >= 1) {
