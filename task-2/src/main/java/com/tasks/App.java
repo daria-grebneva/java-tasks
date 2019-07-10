@@ -9,7 +9,7 @@ public class App
     public static void main( String[] args )
     {
         Solution solution = new Solution();
-        int result = solution.solution("We test coders- Give us a try?");
+        int result = solution.solution(" Forget CVs    Save time       x x");
         LOG.info(result);
     }
 }
