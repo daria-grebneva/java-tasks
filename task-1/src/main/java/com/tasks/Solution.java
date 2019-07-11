@@ -1,13 +1,13 @@
 package com.tasks;
-import java.lang.IllegalArgumentException;
+import com.tasks.exceptions.IncorrectArgumentException;
 
 public class Solution {
 
-    public int solution(int N) {
+    public int solution(int N) throws IncorrectArgumentException {
 
         if (N < 0)
         {
-            throw new IllegalArgumentException("The number should be positive");
+            throw new IncorrectArgumentException("The number should be positive");
         }
 
         int result = 0;

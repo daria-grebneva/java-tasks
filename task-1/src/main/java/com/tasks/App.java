@@ -1,5 +1,6 @@
 package com.tasks;
 
+import com.tasks.exceptions.IncorrectArgumentException;
 import org.apache.log4j.Logger;
 import com.tasks.Solution;
 
@@ -10,8 +11,15 @@ public class App
     public static void main( String[] args )
     {
         Solution solution = new Solution();
-        int result = solution.solution(0);
+        try
+        {
+            int result = solution.solution(0);
+            LOG.info(result);
+        }
+        catch (IncorrectArgumentException e)
+        {
+            LOG.error(e.getMessage());
+        }
 
-        LOG.info(result);
     }
 }
