@@ -1,13 +1,14 @@
 package com.tasks;
 
 public class Tree {
-    public int x;
-    public Tree l;
-    public Tree r;
+    public int key;
+    public Tree left, right;
 
-    public Tree(int x, Tree l, Tree r) {
-        this.x = x;
-        this.l = l;
-        this.r = r;
+    public Tree(int node)
+    {
+        key = node;
+        left = right = null;
     }
+
+
 }
