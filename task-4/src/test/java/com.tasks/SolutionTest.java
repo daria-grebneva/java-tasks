@@ -11,53 +11,57 @@ public class SolutionTest {
 
     @Test
     public void canProcessSimpleTree() throws IncorrectArgumentException {
-        Solution tree = new Solution();
-        tree.root = new Tree(4);
-        tree.root.left = new Tree(5);
-        tree.root.right = new Tree(6);
-        tree.root.right.left = new Tree(1);
-        tree.root.right.right = new Tree(6);
-        tree.root.left.left = new Tree(4);
-        tree.root.left.left.left = new Tree(5);
-        tree.root.left.left.left.left = new Tree(5);
+        Tree tree = new Tree(4);
+        tree.left = new Tree(5);
+        tree.right = new Tree(6);
+        tree.right.left = new Tree(1);
+        tree.right.right = new Tree(6);
+        tree.left.left = new Tree(4);
+        tree.left.left.left = new Tree(5);
+        tree.left.left.left.left = new Tree(5);
+        Solution solution = new Solution(tree);
 
-        Assert.assertEquals(3, tree.getMaxDistingValuesNumber());
+        Assert.assertEquals(3, solution.getMaxDistingValuesNumber());
     }
 
     @Test
     public void throwsExceptionWhenNodeValueBelowAcceptable() throws IncorrectArgumentException {
-        Solution tree = new Solution();
-        tree.root = new Tree(-1);
-        tree.root.left = new Tree(5);
-        tree.root.right = new Tree(6);
+        Tree tree = new Tree(-1);
+        tree.left = new Tree(5);
+        tree.right = new Tree(6);
         expectedEx.expect(IncorrectArgumentException.class);
         expectedEx.expectMessage("Tree node value out of range");
 
-        tree.getMaxDistingValuesNumber();
+        Solution solution = new Solution(tree);
+        solution.getMaxDistingValuesNumber();
     }
 
     @Test
     public void throwsExceptionWhenNodeValueIsMoreThanAcceptable() throws IncorrectArgumentException {
-        Solution tree = new Solution();
-        tree.root = new Tree(50001);
-        tree.root.left = new Tree(5);
-        tree.root.right = new Tree(6);
+        Tree tree = new Tree(50001);
+        tree.left = new Tree(5);
+        tree.right = new Tree(6);
+
         expectedEx.expect(IncorrectArgumentException.class);
         expectedEx.expectMessage("Tree node value out of range");
 
-        tree.getMaxDistingValuesNumber();
+        Solution solution = new Solution(tree);
+        solution.getMaxDistingValuesNumber();
     }
 
     @Test
     public void throwsExceptionWhenDepthOfTreeIsMoreThanAcceptable() throws IncorrectArgumentException {
-        Solution tree = new Solution();
-        for (int i = 0; i < 3501; ++i)
-        {
-            tree.fillTree(i);
-        }
+
         expectedEx.expect(IncorrectArgumentException.class);
         expectedEx.expectMessage("Tree depth is out of range");
 
-        tree.getMaxDistingValuesNumber();
+        Tree tree = new Tree(1);
+        Solution solution = new Solution(tree);
+        for (int i = 1; i < 4000; ++i)
+        {
+            solution.fillTree(i);
+        }
+
+        solution.getMaxDistingValuesNumber();
     }
 }

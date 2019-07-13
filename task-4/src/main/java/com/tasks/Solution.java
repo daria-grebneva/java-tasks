@@ -7,17 +7,39 @@ import java.util.HashMap;
 import static java.lang.Math.max;
 
 public class Solution {
-    public Tree root;
 
-    public Solution() {
-        root = null;
+    private Tree node;
+    private static final int MIN_DEPTH = 0;
+    private static final int MAX_DEPTH = 3500;
+    private static final int MIN_NODE_VALUE = 1;
+    private static final int MAX_NODE_VALUE = 50000;
+
+    public Solution(Tree tree) {
+        node = tree;
+    }
+
+    public int getMaxDistingValuesNumber() throws IncorrectArgumentException {
+        if (node == null)
+            return 0;
+
+        HashMap<Integer, Integer> hash = new HashMap<>();
+        Integer depth = maxDepthUtil(node);
+
+        if (depth < MIN_DEPTH || depth > MAX_DEPTH) {
+            throw new IncorrectArgumentException("Tree depth is out of range");
+        }
+        return getMaxDistingValuesNumberUtil(node, hash);
+    }
+
+    public void fillTree(int value) {
+        node = fillTreeUtil(node, value);
     }
 
     private int getMaxDistingValuesNumberUtil(Tree node, HashMap<Integer, Integer> m) throws IncorrectArgumentException {
         if (node == null)
             return m.size();
 
-        if ((node.key < 1) || (node.key > 50000)) {
+        if ((node.key < MIN_NODE_VALUE) || (node.key > MAX_NODE_VALUE)) {
             throw new IncorrectArgumentException("Tree node value out of range");
         }
 
@@ -37,19 +59,6 @@ public class Solution {
         return max;
     }
 
-    public int getMaxDistingValuesNumber() throws IncorrectArgumentException {
-        if (root == null)
-            return 0;
-
-        HashMap<Integer, Integer> hash = new HashMap<>();
-        Integer depth = maxDepthUtil(root);
-
-        if (depth < 0 || depth > 3500) {
-            throw new IncorrectArgumentException("Tree depth is out of range");
-        }
-        return getMaxDistingValuesNumberUtil(root, hash);
-    }
-
     private int maxDepthUtil(Tree node) {
         if (node == null)
             return 0;
@@ -62,10 +71,6 @@ public class Solution {
             else
                 return (rDepth + 1);
         }
-    }
-
-    public void fillTree(int value) {
-        root = fillTreeUtil(root, value);
     }
 
     private Tree fillTreeUtil(Tree current, int value) {
